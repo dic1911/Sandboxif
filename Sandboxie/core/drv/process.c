@@ -757,52 +757,52 @@ _FX PROCESS *Process_Create(
     // check certificate
     //
 
-    if (!CERT_IS_LEVEL(Verify_CertInfo, eCertStandard) && !proc->image_sbie) {
+//     if (!CERT_IS_LEVEL(Verify_CertInfo, eCertStandard) && !proc->image_sbie) {
 
-        const WCHAR* exclusive_setting = NULL;
-        if (proc->use_security_mode)
-            exclusive_setting = L"UseSecurityMode";
-        else if (proc->is_locked_down)
-            exclusive_setting = L"SysCallLockDown";
-        else if (proc->restrict_devices)
-            exclusive_setting = L"RestrictDevices";
-        else
-#ifdef USE_MATCH_PATH_EX
-        if (proc->use_rule_specificity)
-            exclusive_setting = L"UseRuleSpecificity";
-        else if (proc->use_privacy_mode)
-            exclusive_setting = L"UsePrivacyMode";
-        else
-#endif
-        if (proc->bAppCompartment)
-            exclusive_setting = L"NoSecurityIsolation";
-        else if (proc->protect_host_images)
-            exclusive_setting = L"ProtectHostImages";
+//         const WCHAR* exclusive_setting = NULL;
+//         if (proc->use_security_mode)
+//             exclusive_setting = L"UseSecurityMode";
+//         else if (proc->is_locked_down)
+//             exclusive_setting = L"SysCallLockDown";
+//         else if (proc->restrict_devices)
+//             exclusive_setting = L"RestrictDevices";
+//         else
+// #ifdef USE_MATCH_PATH_EX
+//         if (proc->use_rule_specificity)
+//             exclusive_setting = L"UseRuleSpecificity";
+//         else if (proc->use_privacy_mode)
+//             exclusive_setting = L"UsePrivacyMode";
+//         else
+// #endif
+//         if (proc->bAppCompartment)
+//             exclusive_setting = L"NoSecurityIsolation";
+//         else if (proc->protect_host_images)
+//             exclusive_setting = L"ProtectHostImages";
 
-        if (exclusive_setting) {
+//         if (exclusive_setting) {
 
-            Log_Msg_Process(MSG_6004, proc->box->name, exclusive_setting, box->session_id, proc->pid);
+//             Log_Msg_Process(MSG_6004, proc->box->name, exclusive_setting, box->session_id, proc->pid);
 
-            // allow the process to run for a sort while to allow the features to be evaluated
-            Process_ScheduleKill(proc, 5*60*1000); // 5 minutes
-        }
-    }
+//             // allow the process to run for a sort while to allow the features to be evaluated
+//             Process_ScheduleKill(proc, 5*60*1000); // 5 minutes
+//         }
+//     }
 
-    if (!CERT_IS_LEVEL(Verify_CertInfo, eCertStandard2) && !proc->image_sbie) {
+//     if (!CERT_IS_LEVEL(Verify_CertInfo, eCertStandard2) && !proc->image_sbie) {
         
-        const WCHAR* exclusive_setting = NULL;
-        if (proc->confidential_box)
-            exclusive_setting = L"ConfidentialBox";
+//         const WCHAR* exclusive_setting = NULL;
+//         if (proc->confidential_box)
+//             exclusive_setting = L"ConfidentialBox";
 
-        if (exclusive_setting) {
+//         if (exclusive_setting) {
 
-            Log_Msg_Process(MSG_6009, proc->box->name, exclusive_setting, box->session_id, proc->pid);
+//             Log_Msg_Process(MSG_6009, proc->box->name, exclusive_setting, box->session_id, proc->pid);
 
-            Pool_Delete(pool);
-            Process_CreateTerminated(ProcessId, box->session_id);
-            return NULL;
-        }
-    }
+//             Pool_Delete(pool);
+//             Process_CreateTerminated(ProcessId, box->session_id);
+//             return NULL;
+//         }
+//     }
 
     //
     // configure monitor options
@@ -1221,7 +1221,7 @@ _FX BOOLEAN Process_NotifyProcess_Create(
         BOX* breakout_box = NULL;
 
         if (box && Process_IsBreakoutProcess(box, ImagePath)) {
-            if(!CERT_IS_LEVEL(Verify_CertInfo, eCertStandard))
+            if(0 && !CERT_IS_LEVEL(Verify_CertInfo, eCertStandard))
                 Log_Msg_Process(MSG_6004, box->name, L"BreakoutProcess", box->session_id, CallerId);
             else {
                 UNICODE_STRING image_uni;

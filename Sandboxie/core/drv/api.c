@@ -1327,7 +1327,7 @@ _FX NTSTATUS Api_QueryDriverInfo(PROCESS* proc, ULONG64* parms)
                 FeatureFlags |= SBIE_FEATURE_FLAG_WIN32K_HOOK;
 #endif
 
-            if (CERT_IS_LEVEL(Verify_CertInfo, eCertStandard)) {
+            if (1 || CERT_IS_LEVEL(Verify_CertInfo, eCertStandard)) {
 
                 FeatureFlags |= SBIE_FEATURE_FLAG_CERTIFIED;
 
