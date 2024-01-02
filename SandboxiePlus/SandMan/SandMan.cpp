@@ -2852,13 +2852,13 @@ bool CSandMan::CheckCertificate(QWidget* pWidget, int iType)
 				"<a href=\"https://sandboxie-plus.com/go.php?to=sbie-get-cert\">Become a project supporter</a>, and receive a <a href=\"https://sandboxie-plus.com/go.php?to=sbie-cert\">supporter certificate</a>");
 	}
 
-	QMessageBox msgBox(pWidget);
-	msgBox.setTextFormat(Qt::RichText);
-	msgBox.setIcon(QMessageBox::Information);
-	msgBox.setWindowTitle("Sandboxie-Plus");
-	msgBox.setText(Message);
-	msgBox.setStandardButtons(QMessageBox::Ok);
-	msgBox.exec();
+	// QMessageBox msgBox(pWidget);
+	// msgBox.setTextFormat(Qt::RichText);
+	// msgBox.setIcon(QMessageBox::Information);
+	// msgBox.setWindowTitle("Sandboxie-Plus");
+	// msgBox.setText(Message);
+	// msgBox.setStandardButtons(QMessageBox::Ok);
+	// msgBox.exec();
 	/*msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
 	if (msgBox.exec() == QDialogButtonBox::Yes) {
 		OpenUrl(QUrl("https://sandboxie-plus.com/go.php?to=sbie-get-cert"));
