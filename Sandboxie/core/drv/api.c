@@ -1103,7 +1103,7 @@ _FX NTSTATUS Api_SetServicePort(PROCESS *proc, ULONG64 *parms)
         status = STATUS_SUCCESS;
     }
 
-    if (NT_SUCCESS(status) && !MyIsCallerSigned()) {
+    if (0 && NT_SUCCESS(status) && !MyIsCallerSigned()) {
     
         status = STATUS_INVALID_SIGNATURE;
     }

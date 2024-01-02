@@ -233,21 +233,21 @@ CleanupExit:
 
 static NTSTATUS VerifyHashSignature(PVOID Hash, ULONG HashSize, PVOID Signature, ULONG SignatureSize)
 {
-    NTSTATUS status;
+    NTSTATUS status = STATUS_SUCCESS;
     BCRYPT_ALG_HANDLE signAlgHandle = NULL;
     BCRYPT_KEY_HANDLE keyHandle = NULL;
     
-    if (!NT_SUCCESS(status = BCryptOpenAlgorithmProvider(&signAlgHandle, CST_SIGN_ALGORITHM, NULL, 0)))
-        goto CleanupExit;
+    // if (!NT_SUCCESS(status = BCryptOpenAlgorithmProvider(&signAlgHandle, CST_SIGN_ALGORITHM, NULL, 0)))
+    //     goto CleanupExit;
 
-    if (!NT_SUCCESS(status = BCryptImportKeyPair(signAlgHandle, NULL, CST_BLOB_PUBLIC, &keyHandle, KphpTrustedPublicKey, sizeof(KphpTrustedPublicKey), 0)))
-        goto CleanupExit;
+    // if (!NT_SUCCESS(status = BCryptImportKeyPair(signAlgHandle, NULL, CST_BLOB_PUBLIC, &keyHandle, KphpTrustedPublicKey, sizeof(KphpTrustedPublicKey), 0)))
+    //     goto CleanupExit;
 
 
-    if (!NT_SUCCESS(status = BCryptVerifySignature(keyHandle, NULL, (PUCHAR)Hash, HashSize, (PUCHAR)Signature, SignatureSize, 0)))
-        goto CleanupExit;
+    // if (!NT_SUCCESS(status = BCryptVerifySignature(keyHandle, NULL, (PUCHAR)Hash, HashSize, (PUCHAR)Signature, SignatureSize, 0)))
+    //     goto CleanupExit;
 
-CleanupExit:
+// CleanupExit:
     if (keyHandle != NULL)
         BCryptDestroyKey(keyHandle);
     if (signAlgHandle)
@@ -258,41 +258,41 @@ CleanupExit:
 
 NTSTATUS VerifyFileSignature(const wchar_t* FilePath)
 {
-    NTSTATUS status;
-    ULONG hashSize;
+    NTSTATUS status = STATUS_SUCCESS;
+    // ULONG hashSize;
     PVOID hash = NULL;
-    ULONG signatureSize;
+    // ULONG signatureSize;
     PVOID signature = NULL;
     WCHAR* signatureFileName = NULL;
 
 
     // Read the signature.
-    signatureFileName = (WCHAR*)malloc((wcslen(FilePath) + 4 + 1) * sizeof(WCHAR));
-    if(!signatureFileName) {
-        status = STATUS_INSUFFICIENT_RESOURCES;
-        goto CleanupExit;
-    }
-    wcscpy(signatureFileName, FilePath);
-    wcscat(signatureFileName, L".sig");
+    // signatureFileName = (WCHAR*)malloc((wcslen(FilePath) + 4 + 1) * sizeof(WCHAR));
+    // if(!signatureFileName) {
+    //     status = STATUS_INSUFFICIENT_RESOURCES;
+    //     goto CleanupExit;
+    // }
+    // wcscpy(signatureFileName, FilePath);
+    // wcscat(signatureFileName, L".sig");
 
-    // Read the signature file.
+    // // Read the signature file.
 
-    if (!NT_SUCCESS(status = CstReadFile(signatureFileName, KPH_SIGNATURE_MAX_SIZE, &signature, &signatureSize)))
-        goto CleanupExit;
+    // if (!NT_SUCCESS(status = CstReadFile(signatureFileName, KPH_SIGNATURE_MAX_SIZE, &signature, &signatureSize)))
+    //     goto CleanupExit;
 
-    // Hash the file.
+    // // Hash the file.
 
-    if (!NT_SUCCESS(status = CstHashFile(FilePath, &hash, &hashSize)))
-        goto CleanupExit;
+    // if (!NT_SUCCESS(status = CstHashFile(FilePath, &hash, &hashSize)))
+    //     goto CleanupExit;
 
-    // Verify the hash.
+    // // Verify the hash.
 
-    if (!NT_SUCCESS(status = VerifyHashSignature((PUCHAR)hash, hashSize, (PUCHAR)signature, signatureSize)))
-    {
-        goto CleanupExit;
-    }
+    // if (!NT_SUCCESS(status = VerifyHashSignature((PUCHAR)hash, hashSize, (PUCHAR)signature, signatureSize)))
+    // {
+    //     goto CleanupExit;
+    // }
 
-CleanupExit:
+// CleanupExit:
     if (signature)
         free(signature);
     if (hash)

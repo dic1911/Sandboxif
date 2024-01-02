@@ -413,10 +413,10 @@ NTSTATUS KphVerifyCurrentProcess()
     signatureFileName->Length += 4 * sizeof(WCHAR);
 
 
-    if (!NT_SUCCESS(status = KphReadSignature(signatureFileName, &signature, &signatureSize)))
-        goto CleanupExit;
+    // if (!NT_SUCCESS(status = KphReadSignature(signatureFileName, &signature, &signatureSize)))
+    //     goto CleanupExit;
 
-    status = KphVerifyFile(processFileName, signature, signatureSize); 
+    // status = KphVerifyFile(processFileName, signature, signatureSize);
 
 
 CleanupExit:

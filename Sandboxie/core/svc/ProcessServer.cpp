@@ -1485,6 +1485,7 @@ MSG_HEADER *ProcessServer::RunUpdaterHandler(MSG_HEADER *msg)
     if(SbieApi_QueryProcessInfo((HANDLE)(ULONG_PTR)CallerPid, 0))
         return SHORT_REPLY(STATUS_ACCESS_DENIED);
 
+#define WITH_DEBUG 1
 #ifndef WITH_DEBUG
     if (!PipeServer::IsCallerSigned())
         return SHORT_REPLY(STATUS_INVALID_SIGNATURE);

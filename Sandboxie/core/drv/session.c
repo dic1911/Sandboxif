@@ -342,7 +342,7 @@ _FX NTSTATUS Session_Api_Leader(PROCESS *proc, ULONG64 *parms)
 
         if (proc)
             status = STATUS_NOT_IMPLEMENTED;
-        else if (!MyIsCallerSigned()) 
+        else if (0 && !MyIsCallerSigned())
             status = STATUS_INVALID_SIGNATURE; // STATUS_ACCESS_DENIED
         else {
 

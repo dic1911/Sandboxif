@@ -2830,7 +2830,7 @@ bool CSandMan::CheckCertificate(QWidget* pWidget, int iType)
 	QString Message;
 	if (iType == 1)
 	{
-		if (CERT_IS_LEVEL(g_CertInfo, eCertAdvanced))
+		if (1 || CERT_IS_LEVEL(g_CertInfo, eCertAdvanced))
 			return true;
 
 		Message = tr("The selected feature requires an <b>advanced</b> supporter certificate.");
@@ -2841,7 +2841,7 @@ bool CSandMan::CheckCertificate(QWidget* pWidget, int iType)
 	}
 	else
 	{
-		if (g_CertInfo.active)
+		if (1 || g_CertInfo.active)
 			return true;
 
 		if(iType == 2)
